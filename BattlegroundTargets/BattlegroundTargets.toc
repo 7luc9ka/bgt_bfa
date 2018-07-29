@@ -1,9 +1,9 @@
-## Interface: 70000
+## Interface: 80000
 ## Title: BattlegroundTargets
 ## Notes: A Friend-Enemy-Unit-Frame for battlegrounds.
 ## Notes-deDE: Eine Freund-Feind-Anzeige für Schlachtfelder.
 ## Author: kunda
-## Version: 70000-1
+## Version: 8.0.1_beta
 ## SavedVariables: BattlegroundTargets_Options
 ## X-Curse-Packaged-Version: 70000-6
 ## X-Curse-Project-Name: BattlegroundTargets
