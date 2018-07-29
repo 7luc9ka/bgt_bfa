@@ -132,8 +132,6 @@ local GetBattlefieldArenaFaction = GetBattlefieldArenaFaction
 local GetBattlefieldScore = GetBattlefieldScore
 local GetBattlefieldStatus = GetBattlefieldStatus
 local GetBattlegroundInfo = GetBattlegroundInfo
-local GetClassInfoByID = GetClassInfoByID
-local GetCurrentMapAreaID = GetCurrentMapAreaID
 local GetLocale = GetLocale
 local GetMaxPlayerLevel = GetMaxPlayerLevel
 local GetNumBattlefieldScores = GetNumBattlefieldScores
@@ -543,14 +541,14 @@ local classes = {
 -- roles: 1 = HEALER | 2 = TANK | 3 = DAMAGER
 local classROLES = {HEALER = {}, TANK = {}, DAMAGER = {}}
 for classID = 1, MAX_CLASSES do
-	local _, classTag = GetClassInfoByID(classID)
+	local classTag = C_CreatureInfo.GetClassInfo(classID).classFile
 	local numTabs = GetNumSpecializationsForClassID(classID)
 	--print(numTabs, classID, "#", GetNumSpecializationsForClassID(classID))
 	classes[classTag].spec = {}
 	classes[classTag].fixname = {}
 	classes[classTag].fix = false
 	for i = 1, numTabs do
-		local id, name, _, icon, _, role = GetSpecializationInfoForClassID(classID, i)
+		local id, name, _, icon, role = GetSpecializationInfoForClassID(classID, i)
 		--print(role, id, classID, i, name, icon, "#", GetSpecializationInfoForClassID(classID, i))
 		if     role == "DAMAGER" then classes[classTag].spec[i] = {role = 3, specID = id, specName = name, icon = icon} tinsert(classROLES.DAMAGER, {classTag = classTag, specIndex = i}) -- DAMAGER: total = 23
 		elseif role == "HEALER"  then classes[classTag].spec[i] = {role = 1, specID = id, specName = name, icon = icon} tinsert(classROLES.HEALER,  {classTag = classTag, specIndex = i}) -- HEALER : total =  6
@@ -5367,7 +5365,7 @@ end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 function BattlegroundTargets:OptionsFrameHide()
-	PlaySound("igQuestListClose")
+	PlaySound(845)
 	isConfig = false
 	BattlegroundTargets:EventRegister()
 	TEMPLATE.EnableTextButton(GVAR.InterfaceOptions.CONFIG)
@@ -5390,7 +5388,7 @@ end
 function BattlegroundTargets:OptionsFrameShow()
 	local BattlegroundTargets_Options = BattlegroundTargets_Options
 
-	PlaySound("igQuestListOpen")
+	PlaySound(844)
 	isConfig = true
 	BattlegroundTargets:EventUnregister()
 	TEMPLATE.DisableTextButton(GVAR.InterfaceOptions.CONFIG)
@@ -7029,8 +7027,8 @@ function BattlegroundTargets:IsBattleground()
 	if not currentBGMap then
 		local wmf = WorldMapFrame
 		if wmf and not wmf:IsShown() then
-			SetMapToCurrentZone()
-			local mapId = GetCurrentMapAreaID()
+			local mapId = C_Map.GetBestMapForUnit("player")
+			wmf:SetMapID(mapId)
 			mapName = mapID[mapId]
 			if bgMaps[mapName] then
 				currentBGMap = mapName
@@ -8223,7 +8221,7 @@ function BattlegroundTargets:CheckFlagCarrierCHECK(unitID, unitName) -- FLAGSPY
 
 		-- enemy buff & debuff check
 		for i = 1, 40 do
-			local _, _, _, _, _, _, _, _, _, _, spellId = UnitBuff(unitID, i)
+			local _, _, _, _, _, _, _, _, _, spellId = UnitBuff(unitID, i)
 			if not spellId then break end
 			if flagIDs[spellId] then
 				DATA.Enemy.hasFlag = unitName
@@ -8231,7 +8229,7 @@ function BattlegroundTargets:CheckFlagCarrierCHECK(unitID, unitName) -- FLAGSPY
 				flags = flags + 1
 
 				for j = 1, 40 do
-					local _, _, _, count, _, _, _, _, _, _, spellId = UnitDebuff(unitID, j)
+					local _, _, count, _, _, _, _, _, _, spellId = UnitDebuff(unitID, j)
 					if not spellId then break end
 					if debuffIDs[spellId] then
 						flagDebuff = count
@@ -8315,14 +8313,14 @@ function BattlegroundTargets:CheckFlagCarrierSTART() -- FLAGSPY
 			for num = 1, GetNumGroupMembers() do
 				local unitID = "raid"..num
 				for i = 1, 40 do
-					local _, _, _, _, _, _, _, _, _, _, spellId = UnitBuff(unitID, i)
+					local _, _, _, _, _, _, _, _, _, spellId = UnitBuff(unitID, i)
 					if not spellId then break end
 					if flagIDs[spellId] then
 						flagDebuff = 0
 						flags = 1
 
 						for j = 1, 40 do
-							local _, _, _, count, _, _, _, _, _, _, spellId = UnitDebuff(unitID, j)
+							local _, _, count, _, _, _, _, _, _, spellId = UnitDebuff(unitID, j)
 							if not spellId then break end
 							if debuffIDs[spellId] then
 								flagDebuff = count
