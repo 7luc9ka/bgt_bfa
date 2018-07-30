@@ -393,19 +393,20 @@ local bgMaps = {}
 local function BuildBattlegroundMapTable()
 	for i = 1, GetNumBattlegroundTypes() do
 		local localizedName, _, _, _, bgID, _, _, _, gameType, icon = GetBattlegroundInfo(i)
-		--print(localizedName, bgID, gameType, icon, i, "#", GetBattlegroundInfo(i))
-		    if bgID ==   1 then mapID[401] = localizedName bgMaps[localizedName] = {bgSize = 40, flagBG = 0} -- Alterac Valley
-		elseif bgID ==   2 then mapID[443] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 1} -- Warsong Gulch
-		elseif bgID ==   3 then mapID[461] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 0} -- Arathi Basin
-		elseif bgID ==   7 then mapID[482] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 2} -- Eye of the Storm
-		elseif bgID ==   9 then mapID[512] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 0} -- Strand of the Ancients
-		elseif bgID ==  30 then mapID[540] = localizedName bgMaps[localizedName] = {bgSize = 40, flagBG = 0} -- Isle of Conquest
-		elseif bgID == 108 then mapID[626] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 3} -- Twin Peaks
-		elseif bgID == 120 then mapID[736] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 0} -- The Battle for Gilneas
-		elseif bgID == 699 then mapID[856] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 5} -- Temple of Kotmogu
-		elseif bgID == 708 then mapID[860] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 0} -- Silvershard Mines
-		elseif bgID == 754 then mapID[935] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 4} -- Deepwind Gorge
-		elseif bgID == 789 then                            bgMaps[localizedName] = {bgSize = 40, flagBG = 0} -- Southshore vs Tarren Mill
+		-- print(localizedName, bgID, gameType, icon, i, "#", GetBattlegroundInfo(i))
+			if bgID == 1	then mapID[30] = localizedName bgMaps[localizedName] = {bgSize = 40, flagBG = 0} -- Alterac Valley
+		elseif bgID == 2	then mapID[489] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 1} -- Warsong Gulch
+		elseif bgID == 3	then mapID[529] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 0} -- Arathi Basin
+		elseif bgID == 7	then mapID[566] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 2} -- Eye of the Storm
+		-- elseif bgID == 9	then mapID[512] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 0} -- Strand of the Ancients
+		elseif bgID == 30	then mapID[628] = localizedName bgMaps[localizedName] = {bgSize = 40, flagBG = 0} -- Isle of Conquest
+		elseif bgID == 108	then mapID[726] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 3} -- Twin Peaks
+		elseif bgID == 120	then mapID[761] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 0} -- The Battle for Gilneas
+		elseif bgID == 699	then mapID[998] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 5} -- Temple of Kotmogu
+		elseif bgID == 708	then mapID[727] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 0} -- Silvershard Mines
+		elseif bgID == 754	then mapID[1105] = localizedName bgMaps[localizedName] = {bgSize = 15, flagBG = 4} -- Deepwind Gorge
+		elseif bgID == 789	then							bgMaps[localizedName] = {bgSize = 40, flagBG = 0} -- Southshore vs Tarren Mill
+		elseif bgID == 894	then mapID[1803] = localizedName bgMaps[localizedName] = {bgSize = 10, flagBG = 0} -- Seething Shore
 		end
 	end
 end
