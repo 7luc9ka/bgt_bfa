@@ -5366,7 +5366,7 @@ end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 function BattlegroundTargets:OptionsFrameHide()
-	PlaySound(845)
+	PlaySound(SOUNDKIT.IG_QUEST_LIST_CLOSE)
 	isConfig = false
 	BattlegroundTargets:EventRegister()
 	TEMPLATE.EnableTextButton(GVAR.InterfaceOptions.CONFIG)
@@ -5389,7 +5389,7 @@ end
 function BattlegroundTargets:OptionsFrameShow()
 	local BattlegroundTargets_Options = BattlegroundTargets_Options
 
-	PlaySound(844)
+	PlaySound(SOUNDKIT.IG_QUEST_LIST_OPEN)
 	isConfig = true
 	BattlegroundTargets:EventUnregister()
 	TEMPLATE.DisableTextButton(GVAR.InterfaceOptions.CONFIG)
@@ -8162,7 +8162,7 @@ function BattlegroundTargets:CheckUnitTarget(unitID, unitName, isEvent)
 	end
 
 	-- level
-	if isLowLevel and playerLevel ~= 100 then -- LVLCHK
+	if isLowLevel and playerLevel ~= maxLevel then -- LVLCHK
 		local level = UnitLevel(targetID) or 0
 		if level > 0 then
 			DATA[side].Name2Level[targetName] = level
