@@ -6799,11 +6799,15 @@ function BattlegroundTargets:BattlefieldScoreUpdate()
 			if faction == oppositeFactionBG then
 				local n = RNA[race]
 				if n == 0 then -- summary_flag_texture - 2 - set in bg
+					GVAR.FriendSummary.Logo1:SetTexture("Interface\\FriendsFrame\\PlusManz-Alliance")
+					GVAR.EnemySummary.Logo1:SetTexture("Interface\\FriendsFrame\\PlusManz-Alliance")
 					GVAR.FriendSummary.Logo2:SetTexture("Interface\\FriendsFrame\\PlusManz-Horde")
 					GVAR.EnemySummary.Logo2:SetTexture("Interface\\FriendsFrame\\PlusManz-Horde")
 					oppositeFactionREAL = 0
 					break
 				elseif n == 1 then
+					GVAR.FriendSummary.Logo1:SetTexture("Interface\\FriendsFrame\\PlusManz-Horde")
+					GVAR.EnemySummary.Logo1:SetTexture("Interface\\FriendsFrame\\PlusManz-Horde")
 					GVAR.FriendSummary.Logo2:SetTexture("Interface\\FriendsFrame\\PlusManz-Alliance")
 					GVAR.EnemySummary.Logo2:SetTexture("Interface\\FriendsFrame\\PlusManz-Alliance")
 					oppositeFactionREAL = 1
@@ -8162,7 +8166,7 @@ function BattlegroundTargets:CheckUnitTarget(unitID, unitName, isEvent)
 	end
 
 	-- level
-	if isLowLevel and playerLevel ~= maxLevel then -- LVLCHK
+	if isLowLevel and playerLevel ~= MAX_PLAYER_LEVEL_TABLE[GetAccountExpansionLevel()] then -- LVLCHK
 		local level = UnitLevel(targetID) or 0
 		if level > 0 then
 			DATA[side].Name2Level[targetName] = level
